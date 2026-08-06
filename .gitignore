@@ -1,0 +1,22 @@
+# أدوات محلية — تُنزَّل عند الإعداد ولا تُرفع للريبو
+tools/php/
+tools/wp-cli/
+tools/*.zip
+
+# نواة ووردبريس والإضافات والقوالب الخارجية — تُثبَّت عبر WP-CLI
+# (نتتبع فقط القالب الابن astra-clinic وإضافة clinic-core المخصصة)
+site/*
+!site/wp-content/
+site/wp-content/*
+!site/wp-content/themes/
+site/wp-content/themes/*
+!site/wp-content/themes/astra-clinic/
+!site/wp-content/plugins/
+site/wp-content/plugins/*
+!site/wp-content/plugins/clinic-core/
+
+# قاعدة البيانات والصور المرفوعة — نسخ احتياطي محلي، ليست كودًا
+site/wp-content/database/
+site/wp-content/uploads/
+
+*.log
