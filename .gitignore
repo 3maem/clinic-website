@@ -20,3 +20,6 @@ site/wp-content/database/
 site/wp-content/uploads/
 
 *.log
+
+# حزم الرفع الجاهزة — تُبنى من المصدر المتتبَّع
+dist/
