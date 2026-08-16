@@ -21,5 +21,10 @@ site/wp-content/uploads/
 
 *.log
 
-# حزم الرفع الجاهزة — تُبنى من المصدر المتتبَّع
-dist/
+# حزم الرفع الجاهزة — تُبنى من المصدر المتتبَّع عبر build/make-zips.php
+# لكن حزم النشر نفسها متتبَّعة حتى يمكن جلبها مباشرة على الخادم من GitHub.
+dist/*
+!dist/clinic-content.xml
+!dist/clinic-custom.zip
+!dist/clinic-server-setup.zip
+!dist/clinic-uploads.zip
