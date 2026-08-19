@@ -1,0 +1,7 @@
+# لا يُوضع في المستودع إطلاقًا — يحتوي بيانات قاعدة البيانات والمفاتيح الأمنية
+wp-config.php
+
+wp-content/upgrade/
+wp-content/cache/
+wp-content/uploads/wp-personal-data-exports/
+*.log

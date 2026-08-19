@@ -1,0 +1,16 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/theme.json",
+    "version": 2,
+    "settings": {
+        "color": {
+            "palette": [
+                { "slug": "clinic-navy", "color": "#1F2B6C", "name": "كحلي المستوصف" },
+                { "slug": "clinic-blue", "color": "#159EEC", "name": "أزرق المستوصف" },
+                { "slug": "clinic-light", "color": "#BFD2F8", "name": "أزرق فاتح" },
+                { "slug": "clinic-bg", "color": "#E8F1FF", "name": "خلفية فاتحة" },
+                { "slug": "clinic-text", "color": "#212124", "name": "نص أساسي" },
+                { "slug": "white", "color": "#FFFFFF", "name": "أبيض" }
+            ]
+        }
+    }
+}
