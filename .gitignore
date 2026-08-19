@@ -37,3 +37,6 @@ router-mysql.php
 dist/clinic-db.sql
 dist/clinic-db-compat.sql
 dist/clinic-wp-content.zip
+
+# بيانات الدخول — لا تُرفع للريبو إطلاقًا
+credentials.local.md

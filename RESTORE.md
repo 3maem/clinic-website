@@ -43,7 +43,17 @@
 | `clinic-db.sql` | 290 كيلوبايت | قاعدة البيانات كاملة، الروابط فيها مضبوطة مسبقًا على `https://alkhaleejy-group.com` |
 | `clinic-db-compat.sql` | 290 كيلوبايت | نسخة احتياطية بترميز `utf8mb4_unicode_ci` — تُستخدم فقط إذا رفض السيرفر الترميز الأساسي |
 
-الملفات الثلاثة **مستثناة من Git** (الحجم + تجزئة كلمة مرور `admin`). تُبنى محليًا بأمر واحد — راجع القسم (6).
+الملفات الثلاثة **مستثناة من Git** (الحجم + تجزئة كلمة مرور المدير). تُبنى محليًا بأمر واحد — راجع القسم (6).
+
+**بيانات الموقع المضمّنة في `clinic-db.sql`:**
+
+| | |
+|---|---|
+| اسم الموقع | Alkhaleejy Medical Company |
+| العنوان | `https://alkhaleejy-group.com` |
+| المستخدم | `superuser` |
+| البريد | `abdul.manan@alkhalejy-group.com` |
+| كلمة المرور | في `credentials.local.md` — خارج المستودع |
 
 **ما لا يحتويه `clinic-wp-content.zip` عمدًا:**
 
@@ -100,7 +110,7 @@
 
 ### فورًا بعد التحقق — أمني
 
-- [ ] **غيّر كلمة مرور `admin`** — الاستيراد أعادها إلى `Clinic@2026!` المكتوبة في `README.md`
+- [ ] سجّل الدخول بالمستخدم `superuser` (كلمة المرور في `credentials.local.md` خارج المستودع) وتأكد أن لوحة التحكم تفتح
 - [ ] احذف إضافة `astra-sites` إن لم تكن مستخدمة (تعطّلت تلقائيًا بعد الاستيراد)
 - [ ] تأكد أن SSL يعمل وأن العنوان `https://`
 
@@ -111,27 +121,18 @@
 عدّل على `site-mysql` (على `http://localhost:8080`)، ثم:
 
 ```cmd
-REM 1) شغّل MariaDB
+REM 1) شغّل MariaDB (اتركه مفتوحًا)
 "C:\xampp\mysql\bin\mysqld.exe" --defaults-file=C:\xampp\mysql\bin\my.ini --port=3307 --console
 
-REM 2) شغّل الموقع المحلي
+REM 2) شغّل الموقع المحلي على http://localhost:8080 (اتركه مفتوحًا)
 "C:\PHP\php-8.4.21-nts\php.exe" -S localhost:8080 -t site-mysql router-mysql.php
 
-REM 3) صدّر قاعدة البيانات مع استبدال الروابط
-"C:\PHP\php-8.4.21-nts\php.exe" tools\wp-cli\wp-cli.phar --path=site-mysql search-replace ^
-  "http://localhost:8080" "https://alkhaleejy-group.com" --all-tables --export=dist\clinic-db.sql
-
-REM 4) ابنِ حزمة الملفات
+REM 3) ابنِ الحزمتين بعد ما تخلّص التعديل
+"C:\PHP\php-8.4.21-nts\php.exe" build\make-db.php
 "C:\PHP\php-8.4.21-nts\php.exe" build\make-deploy.php
 ```
 
-> بعد الخطوة 3 أضف إلى أول `clinic-db.sql`:
-> ```sql
-> SET NAMES utf8mb4;
-> SET SESSION sql_mode='';
-> SET FOREIGN_KEY_CHECKS=0;
-> ```
-> وتأكد أن الخيار `uagb_site_url` قيمته `alkhaleejy-group.com` وليس `localhost` (إضافة Spectra تخزّن اسم النطاق منفصلًا عن بقية الروابط).
+`build\make-db.php` يتكفّل بكل التفاصيل الدقيقة: استبدال الروابط داخل البيانات المتسلسلة، وتصحيح خيار `uagb_site_url` الذي تخزّن فيه إضافة Spectra اسم النطاق منفصلًا، وإضافة ترويسة `SET NAMES` و`sql_mode` التي تمنع فشل الاستيراد، وبناء نسخة `compat`. ويفشل بصوتٍ عالٍ لو بقي أي `localhost` في المخرجات.
 
 ---
 
