@@ -28,3 +28,12 @@ dist/*
 !dist/clinic-custom.zip
 !dist/clinic-server-setup.zip
 !dist/clinic-uploads.zip
+
+# النسخة المحلية على MySQL — تُبنى من site/ ولا تُرفع للريبو
+site-mysql/
+router-mysql.php
+
+# مخرجات النشر الكامل: تحتوي تجزئة كلمة مرور admin وحجمها كبير — تبقى محلية
+dist/clinic-db.sql
+dist/clinic-db-compat.sql
+dist/clinic-wp-content.zip
